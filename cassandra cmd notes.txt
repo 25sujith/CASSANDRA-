@@ -1,0 +1,84 @@
+#CREATING THE DATABASE
+CREATE KEYSPACE sample_db
+WITH replication = {'class': ‘SimpleStrategy’, 'replication_factor' : 3};
+
+#ALTERING THE DATABASE
+ALTER KEYSPACE sample_db WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 1};
+
+SELECT*FROM system_schema.keyspaces;
+
+#CREATING THE EMPLOYEE TABLE
+CREATE TABLE emp(
+   emp_id int PRIMARY KEY,
+   emp_name text,
+   emp_city text,
+   emp_sal varint,
+   emp_phone varint
+   );
+
+#SELECTING THE EMPLOYEE TABLE
+select*from emp;
+
+#INSERTING THE DATA INTO THE TABLE 
+
+INSERT INTO emp (emp_id ,emp_name ,emp_city,empphone,emp_sal) VALUES (1,'vamshi' , 'hyderabad',9966330701,1000000);
+INSERT INTO emp (emp_id ,emp_name , emp_city,emp_phone, emp_sal) VALUES (2,'sagar' , 'delhi',9685347569,250000);
+INSERT INTO emp (emp_id ,emp_name , emp_city,emp_phone, emp_sal) VALUES (3,'yashu' , 'goa',9553684297,550000);
+
+#SELECTING THE TABLE 
+select*from emp;
+
+#SELECTING THE EMPLOYEE ID =1 
+select*from emp where emp_id=1;
+
+#UPDATING THE EMPLOYEE TABLE
+update emp SET emp_city='hyderabad' where emp_id=2;
+
+#DELETING THE DATA FROM TABLE 
+delete emp_sal from emp where emp_id=3;
+
+#SELECTING THE TABLE 
+select *from emp;
+
+#CREATING THE DEPARTMENT TABLE 
+CREATE TABLE dep(dep_id int PRIMARY KEY,dep_name text,dep_project text,emp_phone varint);
+
+#INSERTING THE DATA
+INSERT INTO dep (dep_id ,dep_name ,dep_project,emp_phone) VALUES (1,'marketing' , 'promote',9966330701);
+INSERT INTO dep (dep_id ,dep_name ,dep_project,emp_phone) VALUES (2,'IT' , 'recruiting',9966330701);
+INSERT INTO dep (dep_id ,dep_name ,dep_project,emp_phone) VALUES (3,'HR' , 'coordinator',9966330701);
+
+#SELECTING THE DATA
+select*from dep;
+
+#UPDATING THE DATA
+update emp SET dep_name='hr' where dep_id=2;
+
+#TRUNCATING THE TABLE 
+truncate dep;
+
+#DROPING THE TABLE
+drop table dep;
+
+#DESCRIBING THE TABLE 
+describe tables;
+
+#CREATING THE DATA TABLE 
+CREATE TABLE data(name text PRIMARY KEY,email list<text>);
+
+#INSERTING THE DATA
+INSERT INTO data(name ,email) VALUES ('klaus',['klausnik@yahoo.com']);
+INSERT INTO data(name ,email) VALUES ('stephan',['stephansal@yahoo.com']);
+INSERT INTO data(name ,email) VALUES ('kol',['kolmik@yahoo.com']);
+
+#SELECTING THE DATA
+select *from data;
+
+#CREATING THE BLOG TABLE
+CREATE TABLE blogs (blogId int, time1 int, time2 int, author text,content text, PRIMARY KEY(blogId, time1, time2));
+
+#SELECTING THE TABLE
+select * from blogs;
+
+#USING ALLOW FILTERNING
+SELECT * FROM blogs WHERE time1 = 1418 ALLOW FILTERING;
